@@ -1,4 +1,4 @@
 *.php
 *.net
 *.py
-
+!file5.net
