@@ -1,0 +1,137 @@
+ 1  sudo yum install nfs-utils nfs4-acl-tools -y
+    2  hostnamectl set-hostname webserver
+    3  hostnamectl set-hostname webs
+    4  bash
+    5  sudo mkdir /var/www
+    6  sudo mount-t nfs -o rw,nosuid 172.31.39.233:/mnt/apps /var/www
+    7  sudo mount -t nfs -o rw,nosuid 172.31.39.233:/mnt/apps /var/www
+    8  lsblk
+    9  df -h
+   10  sudo touch /var/www/test.md
+   11  sudo vi /etc/fstab
+   12  sudo yum install httpd -y
+   13  ls /var/www
+   14  ls /var/log
+   15  sudo ls /var/log/httpd
+   16  sudo mount -t nfs -o rw,nosuid 172.31.39.233:/mnt/logs /var/log/httpd
+   17  sudo vi /etc/fstab
+   18  sudo yum install git -y
+   19  git init
+   20  git clone https://github.com/shaiksgit/tooling.git
+   21  ls
+   22  cd tooling
+   23  ls
+   24  sudo cp -R html/. /var/www/html
+   25  ls /var/www/html
+   26  ls html
+   27  cd ..
+   28  sudo setenforce 0
+   29  sudo vi /etc/sysconfig/selinux
+   30  sudo systemctl start httpd
+   31  sudo systemctl enable httpd
+   32  sudo systemctl status httpd
+   33  sudo vi /var/www/html/functions.php
+   34  mysql -h 172.31.47.101 -u webaccess -p tooling-db.sql
+   35  mysql -h 172.31.47.101 -u webaccess -p tooling < tooling-db.sql
+   36  sudo yum install mysql
+   37  cd tooling
+   38  mysql -h 172.31.47.101 -u webaccess -p tooling < tooling-db.sql
+   39  which mysql
+   40  mysql version
+   41  sudo rm -rf mysql
+   42  sudo yum install https://dev.mysql.com/get/mysql80-community-release-el7-                       5.noarch.rpm
+   43  mysql -h 172.31.47.101 -u webaccess -p tooling < tooling-db.sql
+   44  cd /usr
+   45  ls -l
+   46  cd lib64
+   47  ls -l
+   48  cd mysql
+   49  ls -l
+   50  cd plugin
+   51  ls -l
+   52  sudo cat mysql_clear_password.so
+   53  PuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuT                       TYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYPuTTYx
+   54  cd ..
+   55  cd tooling
+   56  ls
+   57  cd ~
+   58  ls
+   59  cd tooling
+   60  mysql -h 172.31.47.101 -u webaccess -p tooling < tooling-db.sql
+   61  sudo vi tooling-db.sql
+   62  ls /etc/httpd/conf.d/welcome.conf
+   63  sudo vi /etc/httpd/conf.d/welcome.conf
+   64  sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd//conf.d/welcome.backup
+   65  sudo systemctl restart httpd
+   66  sudo systemctl status httpd
+   67  sudo yum install https://dl.fedoraproject.org/pub/epel/epel-release-lates                       t-8.noarch.rpm -y
+   68  sudo yum install yum-utils http://rpms.remirepo.net/enterprise/remi-relea                       se-8.rpm -y
+   69  sudo yum module list php -y
+   70  sudo yum module reset php -y
+   71  sudo yum module enable php -y
+   72  sudo yum install php php-apache php-gd php-curl php-mysqlnd
+   73  sudo systemctl start php-fpm
+   74  sudo service php5-fpm restart        // php 5.x
+   75  sudo service php5-fpm restart
+   76  sudo service php7.0-fpm restart
+   77  sudo service php7.1-fpm restart
+   78  sudo systemctl restart php8.0-fpm
+   79  sudo systemctl restart httpd
+   80  yum install updates -y
+   81  sudo yum install updates -y
+   82  sudo yum-complete-transaction
+   83  sudo yum update --skip-broke
+   84  sudo systemctl start php-fpm
+   85  ls -l /usr/local/php74/etc/php-fpm.conf
+   86  grep listen /usr/local/php74/etc/php-fpm.conf
+   87  sudo ls -l /usr/local/php74/etc/php-fpm.conf | grep listen /usr/local/php                       74/etc/php-fpm.conf
+   88  sudo systemctl show php-74fpm.service
+   89  sudo systemctl status php-74fpm.service
+   90  sudo systemctl -l | grep -i fpm
+   91  sudo vi /etc/init.d/php-fpm
+   92  sudo yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-la                       test-7.noarch.rpm
+   93  sudo yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.r                       pm
+   94  sudo yum -y install yum-utils
+   95  sudo yum-config-manager --enable remi-php74
+   96  sudo yum update
+   97  sudo yum install php php-cli
+   98  sudo systemctl restart httpd
+   99  sudo vi /var/www/html/functions.php
+  100  sudo vi tooling-db.sql
+  101  sudo yum module list php
+  102  sudo yum module reset php
+  103  sudo systemctl start php-fpm
+  104  sudo systemctl enable php-fpm
+  105  sudo mkdir /var/log/plesk-php55-fpm/
+  106  sudo systemctl start plesk-php55-fpm
+  107  systemctl -l | grep -i fpm
+  108  sudo service php-fpm74 start
+  109  ls -l
+  110  cd /usr
+  111  ls -l
+  112  cd local
+  113  ls -l
+  114  cd etc
+  115  ls -l
+  116  cd ..
+  117  cd lib64
+  118  ls -l
+  119  cd php
+  120  ls -l
+  121  cd modules
+  122  ls -l
+  123  cd ..
+  124  cd ~
+  125  cd tooling
+  126  setsebool -P httpd_execmem 1
+  127  sudo setsebool -P httpd_execmem 1
+  128  sudo vi /etc/sysconfig/selinux
+  129  sudo setsebool -P httpd_execmem 1
+  130  sudo vi /etc/sysconfig/selinux
+  131  sudo setsebool -P httpd_execmem 1
+  132  sudo reboot
+  133  sudo setsebool -P httpd_execmem 1
+  134  sudo systemctl restart httpd
+  135  cd tooling
+  136  sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-lates                       t-8.noarch.rpm
+  137  history

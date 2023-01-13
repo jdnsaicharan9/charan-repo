@@ -1,0 +1,51 @@
+ 1  lsblk
+    2  sudo gdisk /dev/xvdf
+    3  sudo gdisk /dev/xvdg
+    4  sudo gdisk /dev/xvdh
+    5  lsblk
+    6  sudo yum install lvm2 -y
+    7  sudo lvmdiskscan
+    8  sudo pvcreate /dev/xvdf1
+    9  sudo pvcreate /dev/xvdg1
+   10  sudo pvcreate /dev/xvdh1
+   11  lsblk
+   12  sudo pvs
+   13  sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1
+   14  sudo vgs
+   15  sudo lvcreate -n lv-apps -L 9G webdata-vg
+   16  sudo lvcreate -n lv-logs -L 9G webdata-vg
+   17  sudo lvcreate -n lv-opt -L 9G webdata-vg
+   18  lsblk
+   19  sudo lvs
+   20  sudo vgdisplay -v # view complete setup -VG, PV, and LV
+   21  sudo mkfs -t xfs /dev/webdata-vg/lv-apps
+   22  sudo mkfs -t xfs /dev/webdata-vg/lv-logs
+   23  sudo mkfs -t xfs /dev/webdata-vg/lv-opt
+   24  sudo mkdir /mnt/apps
+   25  sudo mkdir /mnt/logs
+   26  sudo mkdir /mnt/opt
+   27  sudo mount /dev/webdata-vg/lv-apps /nt/apps
+   28  sudo mount /dev/webdata-vg/lv-apps /mnt/apps
+   29  sudo mount /dev/webdata-vg/lv-logs /mnt/logs
+   30  sudo mount /dev/webdata-vg/lv-opt /mnt/opt
+   31  sudo yum update -y
+   32  sudo yum install nfs-utils -y
+   33  sudo systemctl start nfs-server.service
+   34  sudo systemctl enable nfs-server.service
+   35  sudo systemctl status nfs-server.service
+   36  sudo chown -R nobody: /mnt/apps
+   37  sudo chown -R nobody: /mnt/logs
+   38  sudo chown -R nobody: /mnt/opt
+   39  sudo chmod -R 777 /mnt/apps
+   40  sudo chmod -R 777 /mnt/logs
+   41  sudo chmod -R 777 /mnt/opt
+   42  sudo systemctl restart nfs-server.service
+   43  sudo vi /etc/exports
+        /mnt/apps 172.31.32.0/20(rw,sync,no_all_squash,no_root_squash)
+        /mnt/logs 172.31.32.0/20(rw,sync,no_all_squash,no_root_squash)
+        /mnt/opt 172.31.32.0/20(rw,sync,no_all_squash,no_root_squash)
+   44  sudo exportfs -arv
+   45  rpcinfo -p | grep nfs
+   46  sudo ls /mnt/apps
+   47  ls /mnt/apps
+   48  history
